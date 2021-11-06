@@ -10,9 +10,8 @@ public class CarController : MonoBehaviour
     [SerializeField] [Range(10f, 100f)] private float _maxVelocity = 20f;
     [SerializeField] [Range(0.01f, 1f)] private float _turnVelocity = 0.1f;
 
-    private float _velocity;
     private RaycastHit[] _hitResults = new RaycastHit[1];
-    private Dictionary<Collider, Road> _cachedRoads = new Dictionary<Collider, Road>();
+    private readonly Dictionary<Collider, Road> _cachedRoads = new Dictionary<Collider, Road>();
     private int _roadLayerMask;
 
     private void Awake()
@@ -23,9 +22,9 @@ public class CarController : MonoBehaviour
     private void FixedUpdate()
     {
         var maxVelocityMultiplier = GetMaxVelocityMultiplier();
-        _velocity += _acceleration * Time.fixedDeltaTime;
-        _velocity = Mathf.Clamp(_velocity, 0, _maxVelocity * maxVelocityMultiplier);
-        _carRigibody.velocity = _carTransform.forward * _velocity;
+        CarData.Velocity.Set(CarData.Velocity.Get() + _acceleration * Time.fixedDeltaTime);
+        CarData.Velocity.Set(Mathf.Clamp(CarData.Velocity.Get(), 0, _maxVelocity * maxVelocityMultiplier));
+        _carRigibody.velocity = _carTransform.forward * CarData.Velocity.Get();
     }
 
     private void Update()
@@ -36,7 +35,7 @@ public class CarController : MonoBehaviour
 
     public void ObstacleHit()
     {
-        _velocity /= 2f;
+        CarData.Velocity.Set(CarData.Velocity.Get() / 2f);
     }
 
     private float GetMaxVelocityMultiplier()
