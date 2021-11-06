@@ -44,6 +44,8 @@ public class LevelManager : MonoBehaviour
             return;
         }
 
+        EventBus.Trigger(EventBus.EventType.CheckpointReached);
+
         ActivateNextCheckpoint();
     }
 }
