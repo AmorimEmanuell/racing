@@ -23,4 +23,9 @@ public class CarController : MonoBehaviour
         var horizontal = Input.GetAxis("Horizontal");
         _carTransform.Rotate(Vector3.up, horizontal * _turnVelocity);
     }
+
+    public void ObstacleHit()
+    {
+        _velocity /= 2f;
+    }
 }
