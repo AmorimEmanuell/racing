@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class CarBoost : MonoBehaviour
 {
+    [Header("Configuration")]
     [SerializeField] [Range(5f, 20f)] private float _rechargeTime = 10f;
     [SerializeField] [Range(2.5f, 10f)] private float _usageTime = 5f;
     [SerializeField] [Range(1f, 10f)] private float _accelerationBoost = 2f;
     [SerializeField] [Range(5f, 20f)] private float _maxVelocityIncrease = 10f;
     [SerializeField] [Range(1.1f, 2f)] private float _steeringDificultyMultiplier = 1.5f;
+
+    [Space(10)]
+    [SerializeField] private AudioSource _boostAudio;
 
     private bool _isBoosting;
 
@@ -58,6 +62,7 @@ public class CarBoost : MonoBehaviour
         if (CarData.Boost.Get() == 1)
         {
             _isBoosting = true;
+            _boostAudio.Play();
             OnEngage?.Invoke(_accelerationBoost, _maxVelocityIncrease, _steeringDificultyMultiplier);
         }
     }
