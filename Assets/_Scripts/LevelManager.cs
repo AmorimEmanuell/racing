@@ -4,32 +4,39 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] private CheckpointSystem _checkpointSystem;
+    [SerializeField] private Transform _startPosition;
     [SerializeField] private float[] _timeGoals;
 
     private int _currentTimeGoal;
+    private Objective _objective;
 
     private void Start()
     {
-        GameData.CurrentObjective.Set(new Objective(_timeGoals[_currentTimeGoal], _currentTimeGoal));
+        _objective = new Objective(_timeGoals[_currentTimeGoal], _currentTimeGoal);
+        GameData.CurrentObjective.Set(_objective);
     }
 
     private void OnEnable()
     {
         _checkpointSystem.OnFinalCheckpointReached += OnFinalCheckpointReached;
-        EventBus.Register(EventBus.EventType.GameUnpaused, OnGameUnpaused);
+
+        EventBus.Register(EventBus.EventType.UnpauseGame, OnGameUnpaused);
+        EventBus.Register(EventBus.EventType.RestartGame, OnGameRestarted);
     }
 
     private void OnDisable()
     {
         _checkpointSystem.OnFinalCheckpointReached -= OnFinalCheckpointReached;
-        EventBus.Unregister(EventBus.EventType.GameUnpaused, OnGameUnpaused);
+
+        EventBus.Unregister(EventBus.EventType.UnpauseGame, OnGameUnpaused);
+        EventBus.Unregister(EventBus.EventType.RestartGame, OnGameRestarted);
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            EventBus.Trigger(EventBus.EventType.GamePaused);
+            EventBus.Trigger(EventBus.EventType.PauseGame);
             Time.timeScale = 0;
             return;
         }
@@ -58,10 +65,23 @@ public class LevelManager : MonoBehaviour
 
     private void OnFinalCheckpointReached()
     {
-        Time.timeScale = 0;
+        Time.timeScale = 0f;
     }
 
-    private void OnGameUnpaused()
+    private void OnGameRestarted(object obj)
+    {
+        GameData.ElapsedTime.Set(0);
+
+        _currentTimeGoal = 0;
+        _objective.Update(_timeGoals[_currentTimeGoal], _currentTimeGoal);
+        GameData.CurrentObjective.Set(_objective);
+
+        EventBus.Trigger(EventBus.EventType.ResetCar, _startPosition);
+
+        Time.timeScale = 1f;
+    }
+
+    private void OnGameUnpaused(object obj)
     {
         Time.timeScale = 1;
     }

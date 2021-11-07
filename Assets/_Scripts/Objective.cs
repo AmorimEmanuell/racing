@@ -1,11 +1,17 @@
 ﻿public struct Objective
 {
-    public float TimeGoal { get; private set; }
-    public int Current { get; private set; }
+    public float TimeGoal { get; set; }
+    public int Current { get; set; }
 
-    public Objective(float timeGoal, int starCount)
+    public Objective(float timeGoal, int current)
     {
         TimeGoal = timeGoal;
-        Current = starCount;
+        Current = current;
+    }
+
+    public void Update(float timeGoal, int current)
+    {
+        TimeGoal = timeGoal;
+        Current = current;
     }
 }

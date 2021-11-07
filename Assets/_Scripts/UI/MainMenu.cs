@@ -22,13 +22,13 @@ public class MainMenu : MonoBehaviour
     private void OnResumeButtonClicked()
     {
         gameObject.SetActive(false);
-        EventBus.Trigger(EventBus.EventType.GameUnpaused);
+        EventBus.Trigger(EventBus.EventType.UnpauseGame);
     }
 
     private void OnRestartButtonClicked()
     {
         gameObject.SetActive(false);
-        EventBus.Trigger(EventBus.EventType.GameUnpaused);
+        EventBus.Trigger(EventBus.EventType.RestartGame);
     }
 
     public void Show()

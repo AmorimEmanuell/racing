@@ -9,16 +9,16 @@ public class WindShieldPanel : MonoBehaviour
     private void OnEnable()
     {
         EventBus.Register(EventBus.EventType.CheckpointReached, OnCheckpointReached);
-        EventBus.Register(EventBus.EventType.GamePaused, OnGamePaused);
+        EventBus.Register(EventBus.EventType.PauseGame, OnGamePaused);
     }
 
     private void OnDisable()
     {
         EventBus.Unregister(EventBus.EventType.CheckpointReached, OnCheckpointReached);
-        EventBus.Unregister(EventBus.EventType.GamePaused, OnGamePaused);
+        EventBus.Unregister(EventBus.EventType.PauseGame, OnGamePaused);
     }
 
-    private void OnCheckpointReached()
+    private void OnCheckpointReached(object obj)
     {
         _checkpointPanel.Show(GameData.ElapsedTime.Get().ToString("F2"));
 
@@ -31,7 +31,7 @@ public class WindShieldPanel : MonoBehaviour
         _checkpointPanel.Hide();
     }
 
-    private void OnGamePaused()
+    private void OnGamePaused(object obj)
     {
         _checkpointPanel.Hide();
         _mainMenu.Show();

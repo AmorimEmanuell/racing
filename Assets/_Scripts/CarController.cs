@@ -19,6 +19,16 @@ public class CarController : MonoBehaviour
         _roadLayerMask = LayerMask.GetMask("Road");
     }
 
+    private void OnEnable()
+    {
+        EventBus.Register(EventBus.EventType.ResetCar, OnResetCar);
+    }
+
+    private void OnDisable()
+    {
+        EventBus.Unregister(EventBus.EventType.ResetCar, OnResetCar);
+    }
+
     private void FixedUpdate()
     {
         var maxVelocityMultiplier = GetMaxVelocityMultiplier();
@@ -56,5 +66,17 @@ public class CarController : MonoBehaviour
         var newlyDiscoveredRoad = hit.collider.GetComponent<Road>();
         _cachedRoads.Add(hit.collider, newlyDiscoveredRoad);
         return newlyDiscoveredRoad.MaxVelocityMultiplier;
+    }
+
+    private void OnResetCar(object obj)
+    {
+        CarData.Velocity.Set(0);
+        _carRigibody.velocity = Vector3.zero;
+
+        var startPosition = obj as Transform;
+        _carTransform.rotation = startPosition.rotation;
+        _carTransform.position = startPosition.position;
+
+        _cachedRoads.Clear();
     }
 }

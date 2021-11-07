@@ -6,40 +6,40 @@ public static class EventBus
     public enum EventType
     {
         CheckpointReached,
-        GamePaused,
-        GameUnpaused,
-        GameRestarted,
-        GameFinished
+        PauseGame,
+        UnpauseGame,
+        RestartGame,
+        ResetCar
     }
 
-    private static Dictionary<EventType, List<Action>> _registeredEvents = new Dictionary<EventType, List<Action>>();
+    private static Dictionary<EventType, List<Action<object>>> _registeredEvents = new Dictionary<EventType, List<Action<object>>>();
 
-    public static void Register(EventType eventType, Action action)
+    public static void Register(EventType eventType, Action<object> action)
     {
-        if (_registeredEvents.TryGetValue(eventType, out List<Action> registeredActions))
+        if (_registeredEvents.TryGetValue(eventType, out List<Action<object>> registeredActions))
         {
             registeredActions.Add(action);
             return;
         }
 
-        _registeredEvents.Add(eventType, new List<Action> { action });
+        _registeredEvents.Add(eventType, new List<Action<object>> { action });
     }
 
-    public static void Unregister(EventType eventType, Action action)
+    public static void Unregister(EventType eventType, Action<object> action)
     {
-        if (_registeredEvents.TryGetValue(eventType, out List<Action> registeredActions))
+        if (_registeredEvents.TryGetValue(eventType, out List<Action<object>> registeredActions))
         {
             registeredActions.Remove(action);
         }
     }
 
-    public static void Trigger(EventType eventType)
+    public static void Trigger(EventType eventType, object args = null)
     {
-        if (_registeredEvents.TryGetValue(eventType, out List<Action> registeredActions))
+        if (_registeredEvents.TryGetValue(eventType, out List<Action<object>> registeredActions))
         {
             for (var i=0; i<registeredActions.Count; i++)
             {
-                registeredActions[i].Invoke();
+                registeredActions[i].Invoke(args);
             }
         }
     }
