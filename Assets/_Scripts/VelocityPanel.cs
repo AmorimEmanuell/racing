@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿#pragma warning disable 0649
+using TMPro;
 using UnityEngine;
 
 public class VelocityPanel : MonoBehaviour

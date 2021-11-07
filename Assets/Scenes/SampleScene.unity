@@ -172,6 +172,10 @@ MonoBehaviour:
   - {fileID: 2090032484}
   - {fileID: 1912402896}
   - {fileID: 1569106647}
+  _timeGoals:
+  - 55
+  - 60
+  - 65
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
