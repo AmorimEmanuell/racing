@@ -10,7 +10,8 @@ public static class EventBus
         UnpauseGame,
         RestartGame,
         ResetCar,
-        DisplayResult
+        DisplayResult,
+        EngageCarBoost
     }
 
     private static Dictionary<EventType, List<Action<object>>> _registeredEvents = new Dictionary<EventType, List<Action<object>>>();

@@ -1,10 +1,10 @@
 ﻿#pragma warning disable 0649
 using UnityEngine;
 
-public class LevelManager : MonoBehaviour
+public class ObjectiveManager : MonoBehaviour
 {
     [SerializeField] private CheckpointSystem _checkpointSystem;
-    [SerializeField] private Transform _startPosition;
+    [SerializeField] private Transform _startCarLocation;
     [SerializeField] private float[] _timeGoals;
 
     private int _currentTimeGoal;
@@ -20,7 +20,6 @@ public class LevelManager : MonoBehaviour
     {
         _checkpointSystem.OnFinalCheckpointReached += OnFinalCheckpointReached;
 
-        EventBus.Register(EventBus.EventType.UnpauseGame, OnGameUnpaused);
         EventBus.Register(EventBus.EventType.RestartGame, OnGameRestarted);
     }
 
@@ -28,19 +27,11 @@ public class LevelManager : MonoBehaviour
     {
         _checkpointSystem.OnFinalCheckpointReached -= OnFinalCheckpointReached;
 
-        EventBus.Unregister(EventBus.EventType.UnpauseGame, OnGameUnpaused);
         EventBus.Unregister(EventBus.EventType.RestartGame, OnGameRestarted);
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            EventBus.Trigger(EventBus.EventType.PauseGame);
-            Time.timeScale = 0;
-            return;
-        }
-
         GameData.ElapsedTime.Set(GameData.ElapsedTime.Get() + Time.deltaTime);
 
         if (_currentTimeGoal == _timeGoals.Length)
@@ -65,7 +56,6 @@ public class LevelManager : MonoBehaviour
 
     private void OnFinalCheckpointReached()
     {
-        Time.timeScale = 0f;
         EventBus.Trigger(EventBus.EventType.DisplayResult);
     }
 
@@ -75,15 +65,9 @@ public class LevelManager : MonoBehaviour
 
         _currentTimeGoal = 0;
         _objective.Update(_timeGoals[_currentTimeGoal], _currentTimeGoal);
+
         GameData.CurrentObjective.Set(_objective);
 
-        EventBus.Trigger(EventBus.EventType.ResetCar, _startPosition);
-
-        Time.timeScale = 1f;
-    }
-
-    private void OnGameUnpaused(object obj)
-    {
-        Time.timeScale = 1;
+        EventBus.Trigger(EventBus.EventType.ResetCar, _startCarLocation);
     }
 }
