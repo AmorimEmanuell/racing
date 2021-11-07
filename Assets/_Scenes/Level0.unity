@@ -440,11 +440,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 765499472595512077, guid: 94265f988e027194891e133c02a17de9,
-        type: 3}
-      propertyPath: _steeringDificultyMultiplier
-      value: 1.5
-      objectReference: {fileID: 0}
     - target: {fileID: 2001986119481087721, guid: 94265f988e027194891e133c02a17de9,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -529,11 +524,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8991068200649849988, guid: 94265f988e027194891e133c02a17de9,
-        type: 3}
-      propertyPath: _steeringVelocity
-      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 9077145507041933623, guid: 94265f988e027194891e133c02a17de9,
         type: 3}

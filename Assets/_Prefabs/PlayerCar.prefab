@@ -705,7 +705,7 @@ MonoBehaviour:
   _carTransform: {fileID: 278268632827946583}
   _acceleration: 2
   _maxVelocity: 20
-  _steeringVelocity: 10
+  _steeringVelocity: 8
   _carBoost: {fileID: 765499472595512077}
   _carRoadDetector: {fileID: 2361467302907460104}
 --- !u!114 &765499472595512077
@@ -738,6 +738,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89a507420c22d634e9f2c20842860d77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _wheels:
+  - {fileID: 6602718424590507840}
+  - {fileID: 6602834643201490150}
 --- !u!65 &1765007982357608
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4562,6 +4565,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 738830bc793a24e46a0a17dce3f80225, type: 3}
+--- !u!4 &6602718424590507840 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4746428110065998, guid: 738830bc793a24e46a0a17dce3f80225,
+    type: 3}
+  m_PrefabInstance: {fileID: 6607147569201483278}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6602834643201490150 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4704443748446952, guid: 738830bc793a24e46a0a17dce3f80225,
+    type: 3}
+  m_PrefabInstance: {fileID: 6607147569201483278}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6610843975308643196 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4259665300587890, guid: 738830bc793a24e46a0a17dce3f80225,

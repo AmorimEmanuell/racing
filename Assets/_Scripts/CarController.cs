@@ -40,7 +40,7 @@ public class CarController : MonoBehaviour
     private void FixedUpdate()
     {
         var velocity = CarData.Velocity.Get() + _acceleration * Time.fixedDeltaTime;
-        var maxVelocity = _maxVelocity * _carRoadDetector.GetMaxVelocityMultiplier(_carTransform);
+        var maxVelocity = _maxVelocity * _carRoadDetector.GetRoadMultipler();
 
         if (velocity > maxVelocity)
         {
