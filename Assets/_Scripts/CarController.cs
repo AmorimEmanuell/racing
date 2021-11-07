@@ -73,6 +73,7 @@ public class CarController : MonoBehaviour
         _carTransform.position = startPosition.position;
 
         _carRoadDetector.ClearRoadCache();
+        _carBoost.ResetValues();
     }
 
     private void EngageBoost(float accelerationBoost, float maxVelocityIncrease, float steeringDificultyMultiplier)

@@ -61,4 +61,15 @@ public class CarBoost : MonoBehaviour
             OnEngage?.Invoke(_accelerationBoost, _maxVelocityIncrease, _steeringDificultyMultiplier);
         }
     }
+
+    public void ResetValues()
+    {
+        if (_isBoosting)
+        {
+            OnDisengage?.Invoke(_accelerationBoost, _maxVelocityIncrease, _steeringDificultyMultiplier);
+        }
+
+        _isBoosting = false;
+        CarData.Boost.Set(0);
+    }
 }
