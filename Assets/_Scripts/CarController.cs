@@ -4,14 +4,21 @@ using UnityEngine;
 
 public class CarController : MonoBehaviour
 {
+    [Header("Car Parts")]
     [SerializeField] private Rigidbody _carRigibody;
     [SerializeField] private Transform _carTransform;
+    
+    [Header("Velocity Parameters")]
     [SerializeField] [Range(0.1f, 10f)] private float _acceleration = 2f;
     [SerializeField] [Range(10f, 100f)] private float _maxVelocity = 20f;
-    [SerializeField] [Range(0.01f, 1f)] private float _turnVelocity = 0.1f;
+    [SerializeField] [Range(0.01f, 1f)] private float _steeringVelocity = 0.1f;
+
+    [Space(10)]
+    [SerializeField] private CarBoost _carBoost;
+
+    private readonly Dictionary<Collider, Road> _cachedRoads = new Dictionary<Collider, Road>();
 
     private RaycastHit[] _hitResults = new RaycastHit[1];
-    private readonly Dictionary<Collider, Road> _cachedRoads = new Dictionary<Collider, Road>();
     private int _roadLayerMask;
 
     private void Awake()
@@ -21,11 +28,17 @@ public class CarController : MonoBehaviour
 
     private void OnEnable()
     {
+        _carBoost.OnEngage += EngageBoost;
+        _carBoost.OnDisengage += DisengageBoost;
+
         EventBus.Register(EventBus.EventType.ResetCar, OnResetCar);
     }
 
     private void OnDisable()
     {
+        _carBoost.OnEngage -= EngageBoost;
+        _carBoost.OnDisengage -= DisengageBoost;
+
         EventBus.Unregister(EventBus.EventType.ResetCar, OnResetCar);
     }
 
@@ -42,7 +55,7 @@ public class CarController : MonoBehaviour
     private void Update()
     {
         var horizontal = Input.GetAxis("Horizontal");
-        _carTransform.Rotate(Vector3.up, horizontal * _turnVelocity);
+        _carTransform.Rotate(Vector3.up, horizontal * _steeringVelocity);
     }
 
     public void ObstacleHit()
@@ -80,5 +93,19 @@ public class CarController : MonoBehaviour
         _carTransform.position = startPosition.position;
 
         _cachedRoads.Clear();
+    }
+
+    private void EngageBoost(float accelerationBoost, float maxVelocityIncrease, float steeringDificultyMultiplier)
+    {
+        _steeringVelocity /= steeringDificultyMultiplier;
+        _maxVelocity += maxVelocityIncrease;
+        _acceleration += accelerationBoost;
+    }
+
+    private void DisengageBoost(float accelerationBoost, float maxVelocityIncrease, float steeringDificultyMultiplier)
+    {
+        _acceleration -= accelerationBoost;
+        _maxVelocity -= maxVelocityIncrease;
+        _steeringVelocity *= steeringDificultyMultiplier;
     }
 }
