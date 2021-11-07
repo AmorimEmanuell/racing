@@ -705,7 +705,7 @@ MonoBehaviour:
   _carTransform: {fileID: 278268632827946583}
   _acceleration: 2
   _maxVelocity: 20
-  _steeringVelocity: 0.1
+  _steeringVelocity: 10
   _carBoost: {fileID: 765499472595512077}
   _carRoadDetector: {fileID: 2361467302907460104}
 --- !u!114 &765499472595512077

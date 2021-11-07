@@ -10,7 +10,7 @@ public class CarController : MonoBehaviour
     [Header("Velocity Parameters")]
     [SerializeField] [Range(0.1f, 10f)] private float _acceleration = 2f;
     [SerializeField] [Range(10f, 100f)] private float _maxVelocity = 20f;
-    [SerializeField] [Range(0.01f, 1f)] private float _steeringVelocity = 0.1f;
+    [SerializeField] [Range(1f, 15f)] private float _steeringVelocity = 15f;
 
     [Space(10)]
     [SerializeField] private CarBoost _carBoost;
@@ -55,7 +55,7 @@ public class CarController : MonoBehaviour
     private void Update()
     {
         var horizontal = Input.GetAxis("Horizontal");
-        _carTransform.Rotate(Vector3.up, horizontal * _steeringVelocity);
+        _carTransform.Rotate(Vector3.up, horizontal * _steeringVelocity * Time.deltaTime);
     }
 
     public void ObstacleHit()
