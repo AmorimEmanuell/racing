@@ -7,29 +7,26 @@ public class ReticleCanvas : MonoBehaviour
 
     private void OnEnable()
     {
-        EventBus.Register(EventBus.EventType.PauseGame, OnGamePaused);
-        EventBus.Register(EventBus.EventType.UnpauseGame, OnGameUnpaused);
-        EventBus.Register(EventBus.EventType.RestartGame, OnGameRestarted);
+        EventBus.Register(EventBus.EventType.PauseGame, Show);
+        EventBus.Register(EventBus.EventType.UnpauseGame, Hide);
+        EventBus.Register(EventBus.EventType.RestartGame, Hide);
+        EventBus.Register(EventBus.EventType.DisplayResult, Show);
     }
 
     private void OnDisable()
     {
-        EventBus.Unregister(EventBus.EventType.PauseGame, OnGamePaused);
-        EventBus.Unregister(EventBus.EventType.UnpauseGame, OnGameUnpaused);
-        EventBus.Register(EventBus.EventType.RestartGame, OnGameRestarted);
+        EventBus.Unregister(EventBus.EventType.PauseGame, Show);
+        EventBus.Unregister(EventBus.EventType.UnpauseGame, Hide);
+        EventBus.Unregister(EventBus.EventType.RestartGame, Hide);
+        EventBus.Unregister(EventBus.EventType.DisplayResult, Show);
     }
 
-    private void OnGamePaused(object args)
+    private void Show(object args)
     {
         _reticle.SetActive(true);
     }
 
-    private void OnGameUnpaused(object obj)
-    {
-        _reticle.SetActive(false);
-    }
-
-    private void OnGameRestarted(object obj)
+    private void Hide(object obj)
     {
         _reticle.SetActive(false);
     }

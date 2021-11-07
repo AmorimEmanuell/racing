@@ -66,6 +66,7 @@ public class LevelManager : MonoBehaviour
     private void OnFinalCheckpointReached()
     {
         Time.timeScale = 0f;
+        EventBus.Trigger(EventBus.EventType.DisplayResult);
     }
 
     private void OnGameRestarted(object obj)

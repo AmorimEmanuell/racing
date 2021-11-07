@@ -5,17 +5,20 @@ public class WindShieldPanel : MonoBehaviour
 {
     [SerializeField] private CheckpointPanel _checkpointPanel;
     [SerializeField] private MainMenu _mainMenu;
+    [SerializeField] private ResultMenu _resultMenu;
 
     private void OnEnable()
     {
         EventBus.Register(EventBus.EventType.CheckpointReached, OnCheckpointReached);
         EventBus.Register(EventBus.EventType.PauseGame, OnGamePaused);
+        EventBus.Register(EventBus.EventType.DisplayResult, OnDisplayResult);
     }
 
     private void OnDisable()
     {
         EventBus.Unregister(EventBus.EventType.CheckpointReached, OnCheckpointReached);
         EventBus.Unregister(EventBus.EventType.PauseGame, OnGamePaused);
+        EventBus.Unregister(EventBus.EventType.DisplayResult, OnDisplayResult);
     }
 
     private void OnCheckpointReached(object obj)
@@ -35,5 +38,13 @@ public class WindShieldPanel : MonoBehaviour
     {
         _checkpointPanel.Hide();
         _mainMenu.Show();
+    }
+
+    private void OnDisplayResult(object obj)
+    {
+        CancelInvoke(nameof(HideCheckpointPanel));
+        HideCheckpointPanel();
+
+        _resultMenu.DisplayResults();
     }
 }

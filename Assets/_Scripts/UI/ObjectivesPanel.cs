@@ -1,24 +1,29 @@
 ﻿#pragma warning disable 0649
-using System;
 using TMPro;
 using UnityEngine;
 
-public class CarPanel : MonoBehaviour
+public class ObjectivesPanel : MonoBehaviour
 {
+    [SerializeField] private Canvas _canvas;
     [SerializeField] private TextMeshProUGUI _elapsedTime;
     [SerializeField] private TextMeshProUGUI _currentObjective;
-    [SerializeField] private StarPanel _starPanel;
 
     private void OnEnable()
     {
         GameData.ElapsedTime.OnChange += UpdateElapsedTime;
         GameData.CurrentObjective.OnChange += OnObjectiveChanged;
+
+        EventBus.Register(EventBus.EventType.RestartGame, OnGameRestarted);
+        EventBus.Register(EventBus.EventType.DisplayResult, OnDisplayResult);
     }
 
     private void OnDisable()
     {
         GameData.ElapsedTime.OnChange -= UpdateElapsedTime;
         GameData.CurrentObjective.OnChange -= OnObjectiveChanged;
+
+        EventBus.Unregister(EventBus.EventType.RestartGame, OnGameRestarted);
+        EventBus.Unregister(EventBus.EventType.DisplayResult, OnDisplayResult);
     }
 
     private void UpdateElapsedTime(float elapsedTime)
@@ -29,6 +34,15 @@ public class CarPanel : MonoBehaviour
     private void OnObjectiveChanged(Objective objective)
     {
         _currentObjective.text = objective.TimeGoal.ToString();
-        _starPanel.ShowStars(objective.Current);
+    }
+
+    private void OnGameRestarted(object obj)
+    {
+        _canvas.enabled = true;
+    }
+
+    private void OnDisplayResult(object obj)
+    {
+        _canvas.enabled = false;
     }
 }
