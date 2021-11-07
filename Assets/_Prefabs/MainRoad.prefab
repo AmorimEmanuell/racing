@@ -112,6 +112,18 @@ Transform:
   m_Father: {fileID: 3407185269572089864}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7201932530866497361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7639986923615979811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a939e9182272c4a4584a0a91639e531a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6469609895918848361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,18 +155,6 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6846201450483515466}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a939e9182272c4a4584a0a91639e531a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &7201932530866497361
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7639986923615979811}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a939e9182272c4a4584a0a91639e531a, type: 3}
@@ -527,10 +527,20 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ddf1b20df9693fa4bbdc3319e0fc8b65, type: 2}
+    - target: {fileID: 4341726115806996937, guid: 80bbfdbc2f110724d941ca4ee572a37c,
+        type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 4341726115806996939, guid: 80bbfdbc2f110724d941ca4ee572a37c,
         type: 3}
       propertyPath: m_Name
       value: MainRoad
+      objectReference: {fileID: 0}
+    - target: {fileID: 4341726115806996939, guid: 80bbfdbc2f110724d941ca4ee572a37c,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967294
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80bbfdbc2f110724d941ca4ee572a37c, type: 3}

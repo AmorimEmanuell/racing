@@ -265,11 +265,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainRoad
       objectReference: {fileID: 0}
-    - target: {fileID: 3407185269572089862, guid: 63582bf72852ebd46930a96e7ed7862c,
+    - target: {fileID: 3407185269572089860, guid: 63582bf72852ebd46930a96e7ed7862c,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: fce506d6213fc8645809d972536683b5, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967294
+      objectReference: {fileID: 0}
     - target: {fileID: 3407185269572089864, guid: 63582bf72852ebd46930a96e7ed7862c,
         type: 3}
       propertyPath: m_LocalPosition.x
