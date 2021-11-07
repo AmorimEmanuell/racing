@@ -35,7 +35,12 @@ public class CarController : MonoBehaviour
     private void FixedUpdate()
     {
         var velocity = CarData.Velocity.Get() + _acceleration * Time.fixedDeltaTime;
-        velocity = Mathf.Clamp(velocity, 0, _maxVelocity * _carRoadDetector.GetMaxVelocityMultiplier(_carTransform));
+        var maxVelocity = _maxVelocity * _carRoadDetector.GetMaxVelocityMultiplier(_carTransform);
+
+        if (velocity > maxVelocity)
+        {
+            velocity = Mathf.Lerp(velocity, maxVelocity, Time.fixedDeltaTime);
+        }
 
         _carRigibody.velocity = _carTransform.forward * velocity;
 
