@@ -5,7 +5,10 @@ public static class EventBus
 {
     public enum EventType
     {
-        CheckpointReached
+        CheckpointReached,
+        GamePaused,
+        GameUnpaused,
+        GameRestarted
     }
 
     private static Dictionary<EventType, List<Action>> _registeredEvents = new Dictionary<EventType, List<Action>>();

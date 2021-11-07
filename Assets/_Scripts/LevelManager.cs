@@ -15,8 +15,25 @@ public class LevelManager : MonoBehaviour
         GameData.CurrentObjective.Set(new Objective(_timeGoals[_currentTimeGoal], _currentTimeGoal));
     }
 
+    private void OnEnable()
+    {
+        EventBus.Register(EventBus.EventType.GameUnpaused, OnGameUnpaused);
+    }
+
+    private void OnDisable()
+    {
+        EventBus.Unregister(EventBus.EventType.GameUnpaused, OnGameUnpaused);
+    }
+
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            EventBus.Trigger(EventBus.EventType.GamePaused);
+            Time.timeScale = 0;
+            return;
+        }
+
         GameData.ElapsedTime.Set(GameData.ElapsedTime.Get() + Time.deltaTime);
 
         if (_currentTimeGoal == _timeGoals.Length)
@@ -68,5 +85,10 @@ public class LevelManager : MonoBehaviour
         EventBus.Trigger(EventBus.EventType.CheckpointReached);
 
         ActivateNextCheckpoint();
+    }
+
+    private void OnGameUnpaused()
+    {
+        Time.timeScale = 1;
     }
 }
