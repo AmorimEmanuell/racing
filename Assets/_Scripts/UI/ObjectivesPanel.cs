@@ -28,12 +28,12 @@ public class ObjectivesPanel : MonoBehaviour
 
     private void UpdateElapsedTime(float elapsedTime)
     {
-        _elapsedTime.text = elapsedTime.ToString("F2");
+        _elapsedTime.SetText("{0:2}", elapsedTime);
     }
 
     private void OnObjectiveChanged(Objective objective)
     {
-        _currentObjective.text = objective.TimeGoal.ToString();
+        _currentObjective.SetText("{0}", objective.TimeGoal);
     }
 
     private void OnGameRestarted(object obj)

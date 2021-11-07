@@ -6,9 +6,9 @@ public class CheckpointPanel : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _checkpointTime;
 
-    public void Show(string time)
+    public void Show(float elapsedTime)
     {
-        _checkpointTime.text = time;
+        _checkpointTime.SetText("{0:2}", elapsedTime);
         gameObject.SetActive(true);
     }
 

@@ -31,10 +31,12 @@ public class CarController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        var maxVelocityMultiplier = GetMaxVelocityMultiplier();
-        CarData.Velocity.Set(CarData.Velocity.Get() + _acceleration * Time.fixedDeltaTime);
-        CarData.Velocity.Set(Mathf.Clamp(CarData.Velocity.Get(), 0, _maxVelocity * maxVelocityMultiplier));
-        _carRigibody.velocity = _carTransform.forward * CarData.Velocity.Get();
+        var velocity = CarData.Velocity.Get() + _acceleration * Time.fixedDeltaTime;
+        velocity = Mathf.Clamp(velocity, 0, _maxVelocity * GetMaxVelocityMultiplier());
+
+        _carRigibody.velocity = _carTransform.forward * velocity;
+
+        CarData.Velocity.Set(velocity);
     }
 
     private void Update()

@@ -18,6 +18,6 @@ public class VelocityPanel : MonoBehaviour
 
     private void UpdateVelocity(float velocity)
     {
-        _velocity.text = velocity.ToString("F2");
+        _velocity.SetText("{0:2}", velocity);
     }
 }

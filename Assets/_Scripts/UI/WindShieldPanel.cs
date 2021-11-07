@@ -23,7 +23,7 @@ public class WindShieldPanel : MonoBehaviour
 
     private void OnCheckpointReached(object obj)
     {
-        _checkpointPanel.Show(GameData.ElapsedTime.Get().ToString("F2"));
+        _checkpointPanel.Show(GameData.ElapsedTime.Get());
 
         CancelInvoke(nameof(HideCheckpointPanel));
         Invoke(nameof(HideCheckpointPanel), 2f);
