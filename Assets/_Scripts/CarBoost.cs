@@ -12,6 +12,8 @@ public class CarBoost : MonoBehaviour
 
     private bool _isBoosting;
 
+    public float MaxVelocityIncrease => _maxVelocityIncrease;
+
     public Action<float, float, float> OnEngage, OnDisengage;
 
     private void OnEnable()

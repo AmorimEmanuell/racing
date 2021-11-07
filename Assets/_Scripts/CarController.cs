@@ -16,6 +16,11 @@ public class CarController : MonoBehaviour
     [SerializeField] private CarBoost _carBoost;
     [SerializeField] private CarRoadDetector _carRoadDetector;
 
+    private void Awake()
+    {
+        CarData.MaxCombinedVelocity = _maxVelocity + _carBoost.MaxVelocityIncrease;
+    }
+
     private void OnEnable()
     {
         _carBoost.OnEngage += EngageBoost;
