@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
 {
-    public Action OnPlayerReach;
+    public Action OnPlayerReached;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            OnPlayerReach?.Invoke();
+            OnPlayerReached?.Invoke();
         }
     }
 }

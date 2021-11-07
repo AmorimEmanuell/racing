@@ -8,7 +8,8 @@ public static class EventBus
         CheckpointReached,
         GamePaused,
         GameUnpaused,
-        GameRestarted
+        GameRestarted,
+        GameFinished
     }
 
     private static Dictionary<EventType, List<Action>> _registeredEvents = new Dictionary<EventType, List<Action>>();

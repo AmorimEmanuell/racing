@@ -3,25 +3,25 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    [SerializeField] private Checkpoint[] _checkpoints;
+    [SerializeField] private CheckpointSystem _checkpointSystem;
     [SerializeField] private float[] _timeGoals;
 
-    private int _currentCheckpoint;
     private int _currentTimeGoal;
 
     private void Start()
     {
-        ActivateNextCheckpoint();
         GameData.CurrentObjective.Set(new Objective(_timeGoals[_currentTimeGoal], _currentTimeGoal));
     }
 
     private void OnEnable()
     {
+        _checkpointSystem.OnFinalCheckpointReached += OnFinalCheckpointReached;
         EventBus.Register(EventBus.EventType.GameUnpaused, OnGameUnpaused);
     }
 
     private void OnDisable()
     {
+        _checkpointSystem.OnFinalCheckpointReached -= OnFinalCheckpointReached;
         EventBus.Unregister(EventBus.EventType.GameUnpaused, OnGameUnpaused);
     }
 
@@ -56,35 +56,9 @@ public class LevelManager : MonoBehaviour
         GameData.CurrentObjective.Set(new Objective(_timeGoals[_currentTimeGoal], _currentTimeGoal));
     }
 
-    private void ActivateNextCheckpoint()
+    private void OnFinalCheckpointReached()
     {
-        var currentCheckpoint = _checkpoints[_currentCheckpoint];
-        currentCheckpoint.OnPlayerReach += OnCheckpointReached;
-        currentCheckpoint.gameObject.SetActive(true);
-    }
-
-    private void DisableCurrentCheckpoint()
-    {
-        var currentCheckpoint = _checkpoints[_currentCheckpoint];
-        currentCheckpoint.OnPlayerReach -= OnCheckpointReached;
-        currentCheckpoint.gameObject.SetActive(false);
-    }
-
-    private void OnCheckpointReached()
-    {
-        DisableCurrentCheckpoint();
-
-        if (++_currentCheckpoint == _checkpoints.Length)
-        {
-            Debug.Log("Game Finished");
-            Time.timeScale = 0f;
-            // TODO: Finish Game
-            return;
-        }
-
-        EventBus.Trigger(EventBus.EventType.CheckpointReached);
-
-        ActivateNextCheckpoint();
+        Time.timeScale = 0;
     }
 
     private void OnGameUnpaused()
