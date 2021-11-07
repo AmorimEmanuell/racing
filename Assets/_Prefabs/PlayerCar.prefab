@@ -646,6 +646,7 @@ GameObject:
   - component: {fileID: 2993575064887895982}
   - component: {fileID: 8991068200649849988}
   - component: {fileID: 765499472595512077}
+  - component: {fileID: 2361467302907460104}
   - component: {fileID: 1765007982357608}
   m_Layer: 0
   m_Name: PlayerCar
@@ -705,6 +706,7 @@ MonoBehaviour:
   _maxVelocity: 20
   _steeringVelocity: 0.1
   _carBoost: {fileID: 765499472595512077}
+  _carRoadDetector: {fileID: 2361467302907460104}
 --- !u!114 &765499472595512077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -722,6 +724,18 @@ MonoBehaviour:
   _accelerationBoost: 2
   _maxVelocityIncrease: 10
   _steeringDificultyMultiplier: 1.5
+--- !u!114 &2361467302907460104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 276404852893010945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89a507420c22d634e9f2c20842860d77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!65 &1765007982357608
 BoxCollider:
   m_ObjectHideFlags: 0
