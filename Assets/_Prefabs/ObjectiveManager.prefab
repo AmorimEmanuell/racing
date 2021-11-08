@@ -95,6 +95,11 @@ PrefabInstance:
       propertyPath: _maxVelocityMultiplier
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4341726115806996932, guid: 80bbfdbc2f110724d941ca4ee572a37c,
+        type: 3}
+      propertyPath: _roadType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4341726115806996935, guid: 80bbfdbc2f110724d941ca4ee572a37c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -179,6 +184,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _maxVelocityMultiplier
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4341726115806996932, guid: 80bbfdbc2f110724d941ca4ee572a37c,
+        type: 3}
+      propertyPath: _roadType
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4341726115806996935, guid: 80bbfdbc2f110724d941ca4ee572a37c,
         type: 3}

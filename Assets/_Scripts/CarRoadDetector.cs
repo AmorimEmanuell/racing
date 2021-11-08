@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CarRoadDetector : MonoBehaviour
 {
-    [SerializeField] private Transform[] _wheels;
+    [SerializeField] private Wheel[] _wheels;
 
     private readonly Dictionary<Collider, Road> _cachedRoads = new Dictionary<Collider, Road>();
 
@@ -22,10 +22,11 @@ public class CarRoadDetector : MonoBehaviour
         for (var i = 0; i < _wheels.Length; i++)
         {
             var currentWheel = _wheels[i];
-            var ray = new Ray(currentWheel.position, -currentWheel.up);
+            var ray = new Ray(currentWheel.Transform.position, -currentWheel.Transform.up);
             var hits = Physics.RaycastNonAlloc(ray, _hitResults, 1f, _roadLayerMask);
             if (hits == 0)
             {
+                currentWheel.EnableDirtEffect(false);
                 continue;
             }
 
@@ -37,6 +38,7 @@ public class CarRoadDetector : MonoBehaviour
                     roadMultiplier = road.MaxVelocityMultiplier;
                 }
 
+                CheckDirtRoad(currentWheel, road);
                 continue;
             }
 
@@ -46,9 +48,16 @@ public class CarRoadDetector : MonoBehaviour
             {
                 roadMultiplier = newlyDiscoveredRoad.MaxVelocityMultiplier;
             }
+
+            CheckDirtRoad(currentWheel, newlyDiscoveredRoad);
         }
 
         return roadMultiplier;
+    }
+
+    private void CheckDirtRoad(Wheel wheel, Road road)
+    {
+        wheel.EnableDirtEffect(road.IsDirt());
     }
 
     public void ClearRoadCache()
