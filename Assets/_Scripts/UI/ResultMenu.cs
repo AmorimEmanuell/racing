@@ -27,6 +27,6 @@ public class ResultMenu : MonoBehaviour
     public void DisplayResults()
     {
         gameObject.SetActive(true);
-        _finalTime.text = GameData.ElapsedTime.Get().ToString("F2");
+        _finalTime.SetText("{0:2}", GameData.ElapsedTime.Get());
     }
 }
