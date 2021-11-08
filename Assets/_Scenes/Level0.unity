@@ -729,11 +729,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8658349396539953030, guid: 6d7b8c343b2866541a1d812e892ef89e,
-        type: 3}
-      propertyPath: _checkpoints.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8995379422942862638, guid: 6d7b8c343b2866541a1d812e892ef89e,
         type: 3}
       propertyPath: m_LocalPosition.x

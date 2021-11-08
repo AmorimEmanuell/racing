@@ -15,6 +15,22 @@ public class CheckpointSystem : MonoBehaviour
         EnableCurrentCheckpoint(true);
     }
 
+    private void OnEnable()
+    {
+        EventBus.Register(EventBus.EventType.RestartGame, OnGameRestarted);
+    }
+
+    private void OnDisable()
+    {
+        EventBus.Unregister(EventBus.EventType.RestartGame, OnGameRestarted);
+    }
+
+    private void OnGameRestarted(object obj)
+    {
+        _currentCheckpoint = 0;
+        EnableCurrentCheckpoint(true);
+    }
+
     private void EnableCurrentCheckpoint(bool enabled)
     {
         var currentCheckpoint = _checkpoints[_currentCheckpoint];
