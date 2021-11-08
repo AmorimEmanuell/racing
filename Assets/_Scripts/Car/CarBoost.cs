@@ -20,16 +20,6 @@ public class CarBoost : MonoBehaviour
 
     public Action<float, float, float> OnEngage, OnDisengage;
 
-    private void OnEnable()
-    {
-        EventBus.Register(EventBus.EventType.EngageCarBoost, OnEngageBoost);
-    }
-
-    private void OnDisable()
-    {
-        EventBus.Unregister(EventBus.EventType.EngageCarBoost, OnEngageBoost);
-    }
-
     private void Update()
     {
         if (!_isBoosting)
@@ -37,6 +27,11 @@ public class CarBoost : MonoBehaviour
             var boost = CarData.Boost.Get() + Time.deltaTime / _rechargeTime;
             boost = Mathf.Clamp01(boost);
             CarData.Boost.Set(boost);
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                ActivateBoost();
+            }
         }
         else
         {
@@ -52,13 +47,8 @@ public class CarBoost : MonoBehaviour
         }
     }
 
-    private void OnEngageBoost(object obj)
+    private void ActivateBoost()
     {
-        if (_isBoosting)
-        {
-            return;
-        }
-
         if (CarData.Boost.Get() == 1)
         {
             _isBoosting = true;

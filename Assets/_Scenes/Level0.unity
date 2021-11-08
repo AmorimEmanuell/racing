@@ -195,7 +195,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: -2.1389313}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: -5.3057996e+14}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -301,7 +301,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1391206244}
-  - component: {fileID: 1391206243}
   - component: {fileID: 1391206242}
   m_Layer: 0
   m_Name: GameManager
@@ -320,18 +319,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f9f0b339c83d36469da6076a06d79bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1391206243
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1391206241}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84e91cc586fadf144856b83a24f17504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1391206244
@@ -727,6 +714,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 411257799892533658, guid: 6d7b8c343b2866541a1d812e892ef89e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 134.9
+      objectReference: {fileID: 0}
     - target: {fileID: 1670864132142986852, guid: 6d7b8c343b2866541a1d812e892ef89e,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -735,6 +727,11 @@ PrefabInstance:
     - target: {fileID: 4719021281099979346, guid: 6d7b8c343b2866541a1d812e892ef89e,
         type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8658349396539953030, guid: 6d7b8c343b2866541a1d812e892ef89e,
+        type: 3}
+      propertyPath: _checkpoints.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8995379422942862638, guid: 6d7b8c343b2866541a1d812e892ef89e,
