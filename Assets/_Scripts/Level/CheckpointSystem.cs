@@ -6,6 +6,9 @@ public class CheckpointSystem : MonoBehaviour
 {
     [SerializeField] private Checkpoint[] _checkpoints;
 
+    [Space(10)]
+    [SerializeField] private Transform _smokeFX;
+
     private int _currentCheckpoint;
 
     public Action OnFinalCheckpointReached;
@@ -44,6 +47,10 @@ public class CheckpointSystem : MonoBehaviour
         if (enabled)
         {
             currentCheckpoint.OnPlayerReached += OnPlayerReachedCheckpoint;
+
+            _smokeFX.SetParent(currentCheckpoint.transform);
+            _smokeFX.localPosition = Vector3.zero;
+            _smokeFX.gameObject.SetActive(true);
         }
         else
         {
