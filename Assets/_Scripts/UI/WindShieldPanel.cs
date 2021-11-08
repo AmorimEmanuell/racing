@@ -36,15 +36,15 @@ public class WindShieldPanel : MonoBehaviour
 
     private void OnGamePaused(object obj)
     {
-        _checkpointPanel.Hide();
+        CancelInvoke(nameof(HideCheckpointPanel));
+        HideCheckpointPanel();
+
         _mainMenu.Show();
     }
 
     private void OnDisplayResult(object obj)
     {
-        CancelInvoke(nameof(HideCheckpointPanel));
-        HideCheckpointPanel();
-
+        _mainMenu.Hide();
         _resultMenu.DisplayResults();
     }
 }

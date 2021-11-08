@@ -28,11 +28,17 @@ public class MainMenu : MonoBehaviour
     private void OnRestartButtonClicked()
     {
         gameObject.SetActive(false);
+        EventBus.Trigger(EventBus.EventType.UnpauseGame);
         EventBus.Trigger(EventBus.EventType.RestartGame);
     }
 
     public void Show()
     {
         gameObject.SetActive(true);
+    }
+
+    public void Hide()
+    {
+        gameObject.SetActive(false);
     }
 }

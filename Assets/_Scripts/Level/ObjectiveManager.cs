@@ -56,6 +56,7 @@ public class ObjectiveManager : MonoBehaviour
 
     private void OnFinalCheckpointReached()
     {
+        EventBus.Trigger(EventBus.EventType.PauseGame);
         EventBus.Trigger(EventBus.EventType.DisplayResult);
     }
 

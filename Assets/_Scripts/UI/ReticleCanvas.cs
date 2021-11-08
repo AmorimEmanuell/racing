@@ -9,16 +9,12 @@ public class ReticleCanvas : MonoBehaviour
     {
         EventBus.Register(EventBus.EventType.PauseGame, Show);
         EventBus.Register(EventBus.EventType.UnpauseGame, Hide);
-        EventBus.Register(EventBus.EventType.RestartGame, Hide);
-        EventBus.Register(EventBus.EventType.DisplayResult, Show);
     }
 
     private void OnDisable()
     {
         EventBus.Unregister(EventBus.EventType.PauseGame, Show);
         EventBus.Unregister(EventBus.EventType.UnpauseGame, Hide);
-        EventBus.Unregister(EventBus.EventType.RestartGame, Hide);
-        EventBus.Unregister(EventBus.EventType.DisplayResult, Show);
     }
 
     private void Show(object args)

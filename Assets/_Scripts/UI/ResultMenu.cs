@@ -21,6 +21,7 @@ public class ResultMenu : MonoBehaviour
     private void OnTryAgainButtonClicked()
     {
         gameObject.SetActive(false);
+        EventBus.Trigger(EventBus.EventType.UnpauseGame);
         EventBus.Trigger(EventBus.EventType.RestartGame);
     }
 
