@@ -27,6 +27,11 @@ public class CheckpointSystem : MonoBehaviour
 
     private void OnGameRestarted(object obj)
     {
+        if (_currentCheckpoint < _checkpoints.Length)
+        {
+            EnableCurrentCheckpoint(false);
+        }
+
         _currentCheckpoint = 0;
         EnableCurrentCheckpoint(true);
     }
