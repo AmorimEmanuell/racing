@@ -67,6 +67,7 @@ public class CarController : MonoBehaviour
     {
         CarData.Velocity.Set(0);
         _carRigibody.velocity = Vector3.zero;
+        _carRigibody.angularVelocity = Vector3.zero;
 
         var startPosition = obj as Transform;
         _carTransform.rotation = startPosition.rotation;
