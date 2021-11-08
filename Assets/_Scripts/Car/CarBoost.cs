@@ -20,6 +20,18 @@ public class CarBoost : MonoBehaviour
 
     public Action<float, float, float> OnEngage, OnDisengage;
 
+    private void OnEnable()
+    {
+        EventBus.Register(EventBus.EventType.PauseGame, PauseBoostAudio);
+        EventBus.Register(EventBus.EventType.UnpauseGame, UnpauseBoostAudio);
+    }
+
+    private void OnDisable()
+    {
+        EventBus.Unregister(EventBus.EventType.PauseGame, PauseBoostAudio);
+        EventBus.Unregister(EventBus.EventType.UnpauseGame, UnpauseBoostAudio);
+    }
+
     private void Update()
     {
         if (!_isBoosting)
@@ -45,6 +57,16 @@ public class CarBoost : MonoBehaviour
                 OnDisengage?.Invoke(_accelerationBoost, _maxVelocityIncrease, _steeringDificultyMultiplier);
             }
         }
+    }
+
+    private void PauseBoostAudio(object obj)
+    {
+        _boostAudio.Pause();
+    }
+
+    private void UnpauseBoostAudio(object obj)
+    {
+        _boostAudio.UnPause();
     }
 
     private void ActivateBoost()
